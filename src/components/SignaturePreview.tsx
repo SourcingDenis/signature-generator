@@ -31,6 +31,8 @@ interface SignaturePreviewProps {
   data: SignatureData;
   config: StyleConfig;
   isDark?: boolean;
+  previewMode: 'rendered' | 'html';
+  setPreviewMode: (mode: 'rendered' | 'html') => void;
 }
 
 interface SortableItemProps {
@@ -73,10 +75,9 @@ function SortableItem({ id, children }: SortableItemProps) {
   );
 }
 
-export function SignaturePreview({ data, config, isDark }: SignaturePreviewProps) {
+export function SignaturePreview({ data, config, isDark, previewMode, setPreviewMode }: SignaturePreviewProps) {
   const previewRef = React.useRef<HTMLDivElement>(null);
   const [elements, setElements] = React.useState(['name', 'title', 'contact', 'social']);
-  const [previewMode, setPreviewMode] = React.useState<'rendered' | 'html'>('rendered');
 
   const getCleanHTML = useCallback(() => {
     if (!previewRef.current) return '';

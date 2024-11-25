@@ -7,6 +7,7 @@ interface StyleCustomizerProps {
   onChange: (config: Partial<StyleConfig>) => void;
   onTemplateSelect: (template: StyleConfig['template'], data: SignatureData) => void;
   isDark?: boolean;
+  data: SignatureData;
 }
 
 const templates = [
@@ -18,7 +19,7 @@ const templates = [
   { id: 'startup', name: 'Startup', description: 'Bold and energetic' },
 ];
 
-export function StyleCustomizer({ config, onChange, onTemplateSelect, isDark }: StyleCustomizerProps) {
+export function StyleCustomizer({ config, onChange, onTemplateSelect, isDark, data }: StyleCustomizerProps) {
   return (
     <div className="vercel-card">
       <div className="p-6">
@@ -30,7 +31,7 @@ export function StyleCustomizer({ config, onChange, onTemplateSelect, isDark }: 
           {templates.map((template) => (
             <button
               key={template.id}
-              onClick={() => onTemplateSelect(template.id as StyleConfig['template'], {} as SignatureData)}
+              onClick={() => onTemplateSelect(template.id as StyleConfig['template'], data)}
               className={`group p-3 rounded-lg text-left transition-colors border
                 ${config.template === template.id
                   ? 'border-black dark:border-white bg-black/5 dark:bg-white/10'

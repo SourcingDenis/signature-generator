@@ -27,6 +27,7 @@ function App() {
     }
     return savedTheme === 'dark';
   });
+  const [previewMode, setPreviewMode] = React.useState<'rendered' | 'html'>('rendered');
 
   React.useEffect(() => {
     // Update class and localStorage when theme changes
@@ -50,6 +51,7 @@ function App() {
   const handleTemplateSelect = (template: StyleConfig['template'], templateData: SignatureData) => {
     setData(templateData);
     updateConfig({ template });
+    setPreviewMode('rendered');
   };
 
   const toggleTheme = () => {
@@ -90,7 +92,13 @@ function App() {
               <div className="hidden lg:block mb-8">
                 <TipsCarousel />
               </div>
-              <SignaturePreview data={data} config={config} isDark={isDark} />
+              <SignaturePreview 
+                data={data} 
+                config={config} 
+                isDark={isDark} 
+                previewMode={previewMode}
+                setPreviewMode={setPreviewMode}
+              />
               <div className="mt-8 lg:hidden">
                 <TipsCarousel />
               </div>
@@ -105,6 +113,7 @@ function App() {
                   onChange={updateConfig}
                   onTemplateSelect={handleTemplateSelect}
                   isDark={isDark}
+                  data={data}
                 />
               </div>
             </div>
