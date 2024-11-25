@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased bg-white dark:bg-black text-[#111111] dark:text-[#fafafa] transition-colors duration-200;
+  }
+
+  /* Smooth scrolling for the whole page */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .vercel-input {
+    @apply w-full px-3 h-10 bg-white dark:bg-black border border-[#eaeaea] dark:border-[#333] rounded-md text-sm transition-colors
+    focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent
+    hover:border-[#999] dark:hover:border-[#666]
+    disabled:opacity-60 disabled:cursor-not-allowed
+    placeholder:text-[#666] dark:placeholder:text-[#999];
+  }
+
+  .vercel-button {
+    @apply h-10 px-4 rounded-md text-sm font-medium transition-colors
+    bg-black dark:bg-white text-white dark:text-black
+    hover:bg-[#333] dark:hover:bg-[#fafafa]
+    disabled:opacity-60 disabled:cursor-not-allowed
+    focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white;
+  }
+
+  .vercel-button-secondary {
+    @apply h-10 px-4 rounded-md text-sm font-medium transition-colors
+    bg-white dark:bg-black text-black dark:text-white
+    border border-[#eaeaea] dark:border-[#333]
+    hover:border-[#999] dark:hover:border-[#666]
+    disabled:opacity-60 disabled:cursor-not-allowed
+    focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white;
+  }
+
+  .vercel-card {
+    @apply bg-white dark:bg-black border border-[#eaeaea] dark:border-[#333] rounded-lg 
+    shadow-[0_1px_2px_rgba(0,0,0,0.04)] dark:shadow-[0_1px_2px_rgba(255,255,255,0.04)]
+    transition-colors duration-200;
+  }
+}
