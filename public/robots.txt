@@ -3,3 +3,10 @@ Allow: /
 
 # Sitemap
 Sitemap: https://e-sign.sourcingdenis.live/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 10
+
+# Disallow paths
+Disallow: /api/
+Disallow: /_next/static/

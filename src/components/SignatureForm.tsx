@@ -70,6 +70,7 @@ export function SignatureForm({ data, onChange, isDark }: SignatureFormProps) {
 
   const getSocialUsername = (url: string | undefined, platform: keyof SignatureData['socials']): string => {
     if (!url) return '';
+    if (platform === 'discord') return url;
     
     try {
       if (!url.startsWith('http')) {

@@ -3,10 +3,7 @@ import { SignatureData } from '../types';
 const defaultSocials = {
   linkedin: '',
   twitter: '',
-  github: '',
-  instagram: '',
-  telegram: '',
-  discord: '',
+  github: ''
 } as const;
 
 export const templatePresets: Record<string, SignatureData> = {
@@ -33,7 +30,7 @@ export const templatePresets: Record<string, SignatureData> = {
     socials: { 
       ...defaultSocials,
       linkedin: 'https://linkedin.com/in/sarahanderson',
-      instagram: 'https://instagram.com/sarahcreates',
+      twitter: 'https://twitter.com/sarahdesigns'
     },
   },
   elegant: {
@@ -48,7 +45,7 @@ export const templatePresets: Record<string, SignatureData> = {
     socials: { 
       ...defaultSocials,
       linkedin: 'https://linkedin.com/in/michaelchen',
-      instagram: 'https://instagram.com/michaelchendesign',
+      twitter: 'https://twitter.com/michaelcreates'
     },
   },
   creative: {
@@ -62,9 +59,7 @@ export const templatePresets: Record<string, SignatureData> = {
     location: 'Austin, TX',
     socials: { 
       ...defaultSocials,
-      twitter: 'https://twitter.com/emmacreates',
-      instagram: 'https://instagram.com/emmacreates',
-      telegram: 'https://t.me/emmacreates',
+      twitter: 'https://twitter.com/emmacreates'
     },
   },
   tech: {
@@ -79,8 +74,7 @@ export const templatePresets: Record<string, SignatureData> = {
     socials: { 
       ...defaultSocials,
       github: 'https://github.com/alexdev',
-      linkedin: 'https://linkedin.com/in/alexdev',
-      discord: 'alexdev#1234',
+      linkedin: 'https://linkedin.com/in/alexdev'
     },
   },
 };

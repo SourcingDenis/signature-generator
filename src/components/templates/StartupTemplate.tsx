@@ -19,7 +19,7 @@ export function StartupTemplate({ data, primaryColor }: StartupTemplateProps) {
   const socialIcons = {
     linkedin: Linkedin,
     twitter: Twitter,
-    github: Github,
+    github: Github
   } as const;
 
   const getHref = (platform: keyof typeof socialIcons, url: string) => {
@@ -123,7 +123,7 @@ export function StartupTemplate({ data, primaryColor }: StartupTemplateProps) {
           if (!Icon) return null;
 
           const href = getHref(platform as keyof typeof socialIcons, url);
-          const title = platform === 'discord' ? url : `Visit ${platform} profile`;
+          const title = `Visit ${platform} profile`;
 
           return (
             <a
