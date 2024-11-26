@@ -1,6 +1,14 @@
 import React from 'react';
 import { SignatureData } from '../../types';
-import { Mail, Phone, Globe, MapPin, Linkedin, Twitter, Github, Instagram, MessageCircle, MessagesSquare } from 'lucide-react';
+import { 
+  Mail, 
+  Phone, 
+  Globe, 
+  MapPin, 
+  Linkedin, 
+  Twitter, 
+  Github
+} from 'lucide-react';
 
 interface StartupTemplateProps {
   data: SignatureData;
@@ -12,9 +20,27 @@ export function StartupTemplate({ data, primaryColor }: StartupTemplateProps) {
     linkedin: Linkedin,
     twitter: Twitter,
     github: Github,
-    instagram: Instagram,
-    telegram: MessageCircle,
-    discord: MessagesSquare,
+  } as const;
+
+  const getHref = (platform: keyof typeof socialIcons, url: string) => {
+    if (!url) return '#';
+    
+    // If it's already a URL, return it
+    if (url.startsWith('http')) {
+      return url;
+    }
+
+    // Handle each platform
+    switch (platform) {
+      case 'linkedin':
+        return `https://linkedin.com/in/${url.replace('@', '')}`;
+      case 'twitter':
+        return `https://twitter.com/${url.replace('@', '')}`;
+      case 'github':
+        return `https://github.com/${url.replace('@', '')}`;
+      default:
+        return '#';
+    }
   };
 
   return (
@@ -90,16 +116,24 @@ export function StartupTemplate({ data, primaryColor }: StartupTemplateProps) {
       </div>
 
       <div className="flex flex-wrap gap-3">
-        {Object.entries(data.socials).map(([platform, url]) => {
-          if (!url) return null;
+        {Object.entries(data.socials || {}).map(([platform, url]) => {
+          if (!url || !platform) return null;
+          
           const Icon = socialIcons[platform as keyof typeof socialIcons];
+          if (!Icon) return null;
+
+          const href = getHref(platform as keyof typeof socialIcons, url);
+          const title = platform === 'discord' ? url : `Visit ${platform} profile`;
+
           return (
             <a
               key={platform}
-              href={platform === 'discord' ? '#' : url}
+              href={href}
               className="p-2 rounded-lg transition-colors hover:bg-gray-100"
               style={{ color: primaryColor }}
-              title={platform === 'discord' ? url : undefined}
+              title={title}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <Icon className="w-4 h-4" />
             </a>

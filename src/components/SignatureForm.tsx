@@ -10,10 +10,7 @@ import {
   MapPin, 
   Linkedin, 
   Twitter,
-  Github,
-  Instagram,
-  MessageCircle,
-  MessagesSquare
+  Github
 } from 'lucide-react';
 import { Input } from './Input';
 import { ImageUpload } from './ImageUpload';
@@ -25,57 +22,64 @@ interface SignatureFormProps {
 }
 
 export function SignatureForm({ data, onChange, isDark }: SignatureFormProps) {
+  // Ensure socials object exists
+  React.useEffect(() => {
+    if (!data.socials) {
+      onChange({
+        socials: {
+          linkedin: '',
+          twitter: '',
+          github: ''
+        }
+      });
+    }
+  }, []);
+
   const handleSocialChange = (key: keyof SignatureData['socials'], username: string) => {
+    if (!data.socials) return;
+
     let value = '';
     if (username) {
-      username = username.replace('@', '');
-      switch (key) {
-        case 'linkedin':
-          value = `https://linkedin.com/in/${username}`;
-          break;
-        case 'twitter':
-          value = `https://twitter.com/${username}`;
-          break;
-        case 'github':
-          value = `https://github.com/${username}`;
-          break;
-        case 'instagram':
-          value = `https://instagram.com/${username}`;
-          break;
-        case 'telegram':
-          value = `https://t.me/${username}`;
-          break;
-        case 'discord':
-          value = username;
-          break;
+      username = username.replace('@', '').trim();
+      if (username.startsWith('http')) {
+        value = username;
+      } else {
+        switch (key) {
+          case 'linkedin':
+            value = `https://linkedin.com/in/${username}`;
+            break;
+          case 'twitter':
+            value = `https://twitter.com/${username}`;
+            break;
+          case 'github':
+            value = `https://github.com/${username}`;
+            break;
+        }
       }
     }
 
+    const newSocials = {
+      ...data.socials,
+      [key]: value
+    };
+
     onChange({
-      socials: {
-        ...data.socials,
-        [key]: value
-      }
+      socials: newSocials
     });
   };
 
   const getSocialUsername = (url: string | undefined, platform: keyof SignatureData['socials']): string => {
     if (!url) return '';
-    switch (platform) {
-      case 'linkedin':
-        return url.replace('https://linkedin.com/in/', '@');
-      case 'twitter':
-        return url.replace('https://twitter.com/', '@');
-      case 'github':
-        return url.replace('https://github.com/', '@');
-      case 'instagram':
-        return url.replace('https://instagram.com/', '@');
-      case 'telegram':
-        return url.replace('https://t.me/', '@');
-      case 'discord':
-        return url;
-      default:
-        return url;
+    
+    try {
+      if (!url.startsWith('http')) {
+        return url.startsWith('@') ? url : '@' + url;
+      }
+      const urlObj = new URL(url);
+      const username = urlObj.pathname.split('/').filter(Boolean).pop() || '';
+      return '@' + username;
+    } catch {
+      return url.startsWith('@') ? url : '@' + url;
     }
   };
 
@@ -191,33 +195,6 @@ export function SignatureForm({ data, onChange, isDark }: SignatureFormProps) {
             onChange={(value) => handleSocialChange('github', value)}
             placeholder="@johndoe"
             icon={<Github className="h-4 w-4" />}
-            isDark={isDark}
-          />
-
-          <Input
-            label="Instagram"
-            value={getSocialUsername(data.socials?.instagram, 'instagram')}
-            onChange={(value) => handleSocialChange('instagram', value)}
-            placeholder="@johndoe"
-            icon={<Instagram className="h-4 w-4" />}
-            isDark={isDark}
-          />
-
-          <Input
-            label="Telegram"
-            value={getSocialUsername(data.socials?.telegram, 'telegram')}
-            onChange={(value) => handleSocialChange('telegram', value)}
-            placeholder="@johndoe"
-            icon={<MessageCircle className="h-4 w-4" />}
-            isDark={isDark}
-          />
-
-          <Input
-            label="Discord"
-            value={data.socials?.discord || ''}
-            onChange={(value) => handleSocialChange('discord', value)}
-            placeholder="johndoe#1234"
-            icon={<MessagesSquare className="h-4 w-4" />}
             isDark={isDark}
           />
         </div>

@@ -85,36 +85,37 @@ function App() {
       </header>
 
       <main className="flex-1 py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Preview section - will be first on mobile */}
-            <div className="lg:order-2">
-              <div className="hidden lg:block mb-8">
-                <TipsCarousel />
-              </div>
-              <SignaturePreview 
-                data={data} 
-                config={config} 
-                isDark={isDark} 
-                previewMode={previewMode}
-                setPreviewMode={setPreviewMode}
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row gap-6">
+            <div className="w-full lg:w-[400px] space-y-6 order-1 lg:order-none">
+              <SignatureForm
+                data={data}
+                onChange={updateData}
+                isDark={isDark}
               />
-              <div className="mt-8 lg:hidden">
-                <TipsCarousel />
-              </div>
+
+              <StyleCustomizer
+                config={config}
+                onChange={updateConfig}
+                onTemplateSelect={handleTemplateSelect}
+                isDark={isDark}
+                data={data}
+              />
             </div>
 
-            {/* Form and Customizer section - will be second on mobile */}
-            <div className="space-y-8 lg:order-1">
-              <SignatureForm data={data} onChange={updateData} isDark={isDark} />
-              <div className="lg:sticky lg:top-[88px]">
-                <StyleCustomizer 
-                  config={config} 
-                  onChange={updateConfig}
-                  onTemplateSelect={handleTemplateSelect}
-                  isDark={isDark}
+            <div className="flex-1 space-y-6 order-2 lg:order-none">
+              <div className="vercel-card p-6">
+                <SignaturePreview
                   data={data}
+                  config={config}
+                  isDark={isDark}
+                  previewMode={previewMode}
+                  setPreviewMode={setPreviewMode}
                 />
+              </div>
+
+              <div className="vercel-card p-6 order-3 lg:order-none">
+                <TipsCarousel isDark={isDark} />
               </div>
             </div>
           </div>

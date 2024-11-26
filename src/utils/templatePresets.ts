@@ -7,7 +7,7 @@ const defaultSocials = {
   instagram: '',
   telegram: '',
   discord: '',
-};
+} as const;
 
 export const templatePresets: Record<string, SignatureData> = {
   minimal: {
@@ -19,11 +19,7 @@ export const templatePresets: Record<string, SignatureData> = {
     website: 'www.techcorp.com',
     logo: '',
     location: 'San Francisco, CA',
-    socials: {
-      ...defaultSocials,
-      linkedin: 'https://linkedin.com/in/johndoe',
-      twitter: 'https://twitter.com/johndoe',
-    },
+    socials: { ...defaultSocials },
   },
   modern: {
     name: 'Sarah Anderson',
@@ -34,7 +30,7 @@ export const templatePresets: Record<string, SignatureData> = {
     website: 'www.designcraft.com',
     logo: '',
     location: 'New York, NY',
-    socials: {
+    socials: { 
       ...defaultSocials,
       linkedin: 'https://linkedin.com/in/sarahanderson',
       instagram: 'https://instagram.com/sarahcreates',
@@ -49,7 +45,7 @@ export const templatePresets: Record<string, SignatureData> = {
     website: 'www.artisanstudio.com',
     logo: '',
     location: 'Los Angeles, CA',
-    socials: {
+    socials: { 
       ...defaultSocials,
       linkedin: 'https://linkedin.com/in/michaelchen',
       instagram: 'https://instagram.com/michaelchendesign',
@@ -64,7 +60,7 @@ export const templatePresets: Record<string, SignatureData> = {
     website: 'www.creativewave.co',
     logo: '',
     location: 'Austin, TX',
-    socials: {
+    socials: { 
       ...defaultSocials,
       twitter: 'https://twitter.com/emmacreates',
       instagram: 'https://instagram.com/emmacreates',
@@ -80,7 +76,7 @@ export const templatePresets: Record<string, SignatureData> = {
     website: 'www.codelabs.dev',
     logo: '',
     location: 'Seattle, WA',
-    socials: {
+    socials: { 
       ...defaultSocials,
       github: 'https://github.com/alexdev',
       linkedin: 'https://linkedin.com/in/alexdev',

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://e-sign.sourcingdenis.live/sitemap.xml
