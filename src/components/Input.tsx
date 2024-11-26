@@ -10,6 +10,15 @@ interface InputProps {
 }
 
 export function Input({ label, value, onChange, placeholder, icon, isDark }: InputProps) {
+  const [hasFocused, setHasFocused] = React.useState(false);
+
+  const handleFocus = () => {
+    if (!hasFocused) {
+      onChange('');
+      setHasFocused(true);
+    }
+  };
+
   return (
     <div className="space-y-1.5">
       <label className="block text-xs text-[#666] dark:text-[#888]">
@@ -25,6 +34,7 @@ export function Input({ label, value, onChange, placeholder, icon, isDark }: Inp
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          onFocus={handleFocus}
           className={`vercel-input h-9 ${icon ? 'pl-9' : ''}`}
           placeholder={placeholder}
         />

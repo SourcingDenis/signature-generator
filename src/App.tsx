@@ -87,23 +87,8 @@ function App() {
       <main className="flex-1 py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row gap-6">
-            <div className="w-full lg:w-[400px] space-y-6 order-1 lg:order-none">
-              <SignatureForm
-                data={data}
-                onChange={updateData}
-                isDark={isDark}
-              />
-
-              <StyleCustomizer
-                config={config}
-                onChange={updateConfig}
-                onTemplateSelect={handleTemplateSelect}
-                isDark={isDark}
-                data={data}
-              />
-            </div>
-
-            <div className="flex-1 space-y-6 order-2 lg:order-none">
+            {/* Preview Section - First on mobile */}
+            <div className="flex-1 space-y-6 order-1 lg:order-2">
               <div className="vercel-card p-6">
                 <SignaturePreview
                   data={data}
@@ -113,8 +98,31 @@ function App() {
                   setPreviewMode={setPreviewMode}
                 />
               </div>
+            </div>
 
-              <div className="vercel-card p-6 order-3 lg:order-none">
+            {/* Templates Section - Second on mobile */}
+            <div className="w-full lg:w-[400px] space-y-6 order-2 lg:order-1">
+              <StyleCustomizer
+                config={config}
+                onChange={updateConfig}
+                onTemplateSelect={handleTemplateSelect}
+                isDark={isDark}
+                data={data}
+              />
+            </div>
+
+            {/* Profile Information - Third on mobile */}
+            <div className="w-full lg:w-[400px] space-y-6 order-3">
+              <SignatureForm
+                data={data}
+                onChange={updateData}
+                isDark={isDark}
+              />
+            </div>
+
+            {/* Tips Carousel - Last on mobile */}
+            <div className="w-full order-4">
+              <div className="vercel-card p-6">
                 <TipsCarousel isDark={isDark} />
               </div>
             </div>
